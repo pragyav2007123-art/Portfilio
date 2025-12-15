@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Pragya Verma — business & marketing portfolio" />
+  <title>Pragya Verma — Portfolio</title>
+
+  <!-- Single-file, professional business-blue aesthetic. No external dependencies. -->
+  <style>
+    :root{
+      --bg0:#050A18;
+      --bg1:#07112A;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.72);
+      --muted2: rgba(234,240,255,.58);
+      --brand:#2E6BFF;
+      --brand2:#45B2FF;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --shadow2: 0 10px 26px rgba(0,0,0,.28);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 0%, rgba(46,107,255,.30), transparent 60%),
+        radial-gradient(900px 600px at 92% 18%, rgba(69,178,255,.22), transparent 60%),
+        radial-gradient(1000px 700px at 40% 105%, rgba(46,107,255,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color: inherit; text-decoration:none; }
+    a:hover{ opacity:.92; }
+
+    /* Subtle grid texture */
+    .grid{
+      pointer-events:none;
+      position:fixed; inset:0;
+      opacity:.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(900px 520px at 50% 10%, rgba(0,0,0,1), transparent 65%);
+    }
+
+    /* Layout */
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 0 22px; }
+
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,10,24,.72), rgba(5,10,24,.38));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 760;
+      letter-spacing: .2px;
+    }
+
+    .logo{
+      width: 36px; height: 36px; border-radius: 12px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.60), transparent 60%),
+        linear-gradient(135deg, rgba(46,107,255,1), rgba(69,178,255,1));
+      box-shadow: 0 12px 26px rgba(46,107,255,.25);
+      border: 1px solid rgba(255,255,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-20px;
+      background: radial-gradient(180px 70px at 30% 30%, rgba(255,255,255,.28), transparent 60%);
+      transform: rotate(12deg);
+    }
+
+    .navlinks{ display:flex; gap: 10px; flex-wrap:wrap; justify-content:flex-end; }
+    .navlinks a{
+      padding: 9px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: .18s ease;
+      font-size: 14px;
+    }
+    .navlinks a:hover{
+      border-color: rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      box-shadow: var(--shadow2);
+      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+      font-weight: 650;
+      font-size: 14px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    .btn.primary{
+      border-color: rgba(46,107,255,.52);
+      background: linear-gradient(135deg, rgba(46,107,255,.95), rgba(69,178,255,.85));
+      box-shadow: 0 14px 35px rgba(46,107,255,.22);
+    }
+
+    main{ padding: 34px 0 70px; }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 22px;
+      align-items: stretch;
+      padding: 22px 0 10px;
+    }
+
+    .card{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(600px 220px at 20% 0%, rgba(46,107,255,.23), transparent 60%);
+      pointer-events:none;
+    }
+
+    .heroLeft{ padding: 26px; }
+    .kicker{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(46,107,255,.10);
+      border: 1px solid rgba(46,107,255,.28);
+      color: rgba(234,240,255,.85);
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 99px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 4px rgba(46,107,255,.16);
+    }
+
+    h1{ margin: 14px 0 10px; font-size: clamp(34px, 3.6vw, 48px); line-height:1.05; letter-spacing:-.6px; }
+    .sub{ color: var(--muted); font-size: 16px; line-height:1.55; max-width: 60ch; }
+
+    .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 18px; }
+
+    .heroMeta{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 12px 12px;
+    }
+    .pill .t{ font-size:12px; color: var(--muted2); text-transform:uppercase; letter-spacing:.12em; }
+    .pill .v{ margin-top:6px; font-weight:750; }
+
+    .heroRight{ padding: 22px; display:flex; flex-direction:column; gap: 12px; }
+
+    .profile{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 16px;
+      display:flex;
+      gap: 14px;
+      align-items:flex-start;
+    }
+    .avatar{
+      width: 56px; height:56px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.55), transparent 60%),
+        linear-gradient(135deg, rgba(46,107,255,1), rgba(69,178,255,1));
+      box-shadow: 0 16px 28px rgba(46,107,255,.22);
+      flex: 0 0 auto;
+      position:relative;
+      overflow:hidden;
+    }
+    .avatar::after{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(220px 80px at 25% 25%, rgba(255,255,255,.28), transparent 60%);
+      transform: rotate(14deg);
+    }
+
+    .profile h2{ margin:0; font-size:16px; letter-spacing:.1px; }
+    .profile p{ margin: 6px 0 0; color: var(--muted); line-height:1.5; font-size: 14px; }
+
+    .quickLinks{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .q{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      transition: .18s ease;
+    }
+    .q:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); }
+    .q span{ color: var(--muted); font-size: 13px; }
+    .q b{ font-size: 13px; }
+
+    /* Sections */
+    section{ padding: 22px 0; }
+    .sectionHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      margin: 12px 0 14px;
+    }
+    .sectionHead h3{ margin:0; font-size: 18px; letter-spacing:.2px; }
+    .sectionHead p{ margin:0; color: var(--muted); font-size: 14px; max-width: 70ch; }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+
+    .tile{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .tile::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 200px at 20% 0%, rgba(46,107,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+
+    .tile h4{ margin:0 0 6px; font-size: 15px; }
+    .tile .meta{ color: var(--muted2); font-size: 12px; text-transform:uppercase; letter-spacing:.10em; }
+    .tile p{ margin: 10px 0 0; color: var(--muted); line-height:1.55; font-size: 14px; }
+
+    .tags{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
+    .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,240,255,.78);
+    }
+
+    /* Timeline */
+    .timeline{ display:grid; gap: 12px; }
+    .item{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 16px;
+    }
+    .itemTop{ display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap; }
+    .role{ font-weight: 760; }
+    .org{ color: var(--muted); }
+    .when{ color: var(--muted2); font-size: 13px; white-space:nowrap; }
+    .bullets{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.55; }
+    .bullets li{ margin: 7px 0; }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(5,10,24,.55);
+      padding: 22px 0;
+    }
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      align-items:center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Mobile */
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      .heroMeta{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .quickLinks{ grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
+    }
+
+    /* Small helper */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  </style>
+</head>
+
+<body>
+  <div class="grid" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="#top">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Pragya Verma</span>
+        </a>
+
+        <div class="navlinks" id="navlinks">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#leadership">Leadership</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <!-- HERO -->
+      <div class="hero">
+        <div class="card heroLeft">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> Business • Marketing • Community Impact</div>
+          <h1>Building programs, campaigns, and community initiatives that move people to action.</h1>
+          <p class="sub">
+            I’m Pragya — a driven, organized student leader with experience in event coordination, volunteer mobilization, and marketing operations.
+            I care about ethical persuasion, clear systems, and real-world results.
+          </p>
+
+          <div class="heroActions">
+            <a class="btn primary" href="#contact" aria-label="Jump to contact">Let’s connect</a>
+            <a class="btn" href="#projects" aria-label="See projects">View work</a>
+            <a class="btn" href="#" id="downloadBtn" aria-label="Download resume">Download resume (PDF)</a>
+          </div>
+
+          <div class="heroMeta" aria-label="Quick highlights">
+            <div class="pill">
+              <div class="t">Focus</div>
+              <div class="v">Marketing + Operations</div>
+            </div>
+            <div class="pill">
+              <div class="t">Strengths</div>
+              <div class="v">Leadership + Execution</div>
+            </div>
+            <div class="pill">
+              <div class="t">Based in</div>
+              <div class="v">Aldie, VA</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card heroRight" aria-label="Profile">
+          <div class="profile">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+              <h2>Professional snapshot</h2>
+              <p>
+                Senior at John Champe High School pursuing advanced coursework with hands-on experience across tutoring,
+                youth sports operations, and community-focused leadership.
+              </p>
+            </div>
+          </div>
+
+          <div class="quickLinks" aria-label="Quick links">
+            <a class="q" href="mailto:pragyav2007123@gmail.com"><b>Email</b><span>pragyav2007123@gmail.com</span></a>
+            <a class="q" href="#contact"><b>Phone</b><span>(add your number)</span></a>
+            <a class="q" href="#projects"><b>Featured</b><span>Her Financial Future</span></a>
+            <a class="q" href="#"><b>LinkedIn</b><span>(add link)</span></a>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Currently</div>
+            <h4>DECA Vice President of Leadership</h4>
+            <p>
+              I run meeting logistics, calendars, communications, and documentation — so the officer team can move faster and execute cleaner.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="sectionHead">
+          <div>
+            <h3>About</h3>
+            <p>What I’m about: organized execution, strong communication, and marketing that’s responsible and measurable.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <div class="meta">Summary</div>
+            <h4>How I work</h4>
+            <p>
+              I’m happiest when a big goal becomes a clear plan: timelines, roles, outreach, and a system that keeps people aligned.
+              I’ve led volunteer initiatives and coordinated events where details matter — and where good messaging makes participation easy.
+            </p>
+            <div class="tags" aria-label="Strength tags">
+              <span class="tag">event-planning</span>
+              <span class="tag">community-partnerships</span>
+              <span class="tag">marketing-ops</span>
+              <span class="tag">team-leadership</span>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Education</div>
+            <h4>John Champe High School</h4>
+            <p>
+              GPA 4.11 • Advanced Studies Diploma (in progress) • Relevant coursework: AP Seminar, AP Research, AP Econ (Macro/Micro), AP Statistics, AP English Language, AP Psychology.
+            </p>
+            <div class="tags" aria-label="Coursework tags">
+              <span class="tag">research</span>
+              <span class="tag">stats</span>
+              <span class="tag">economics</span>
+              <span class="tag">communication</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="sectionHead">
+          <div>
+            <h3>Experience</h3>
+            <p>Hands-on roles that built my operational skills, organization, and ability to support people at scale.</p>
+          </div>
+        </div>
+
+        <div class="timeline" role="list">
+          <div class="item" role="listitem">
+            <div class="itemTop">
+              <div>
+                <div class="role">Intern & Tutor</div>
+                <div class="org">MyExamsPrep • Ashburn, VA</div>
+              </div>
+              <div class="when">Summer 2022 / 2023</div>
+            </div>
+            <ul class="bullets">
+              <li>Provided academic support to students (K–8), adapting instruction to individual learning styles.</li>
+              <li>Balanced instructional work with administrative and data-entry responsibilities across multiple software tools.</li>
+              <li>Graded practice tests and worksheets accurately across varying difficulty levels and communicated results clearly.</li>
+            </ul>
+          </div>
+
+          <div class="item" role="listitem">
+            <div class="itemTop">
+              <div>
+                <div class="role">Childcare Provider</div>
+                <div class="org">Neighborhood families • Ashburn/Aldie, VA</div>
+              </div>
+              <div class="when">Summer 2019 – Present</div>
+            </div>
+            <ul class="bullets">
+              <li>Provided reliable childcare services for multiple families with a focus on safety, trust, and communication.</li>
+              <li>Planned engaging, educational activities that supported learning and positive routines.</li>
+            </ul>
+          </div>
+
+          <div class="item" role="listitem">
+            <div class="itemTop">
+              <div>
+                <div class="role">Marketing / Event Coordinator</div>
+                <div class="org">Youth Summer Swim Team • Aldie, VA</div>
+              </div>
+              <div class="when">Jun 2024 – Aug 2024</div>
+            </div>
+            <ul class="bullets">
+              <li>Organized fundraisers, managed concessions, and coordinated meet logistics and team activities.</li>
+              <li>Supported communications and engagement to make participation seamless for families and athletes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEADERSHIP -->
+      <section id="leadership">
+        <div class="sectionHead">
+          <div>
+            <h3>Leadership & Service</h3>
+            <p>Roles where I built systems, mobilized volunteers, and helped teams execute consistently.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="meta">DECA</div>
+            <h4>Vice President of Leadership</h4>
+            <p>
+              Maintained officer meeting notes, agendas, deadlines calendar, attendance tracking, and timely chapter communications.
+              Helped plan leadership events, field trips, conferences, and document organization.
+            </p>
+            <div class="tags">
+              <span class="tag">operations</span>
+              <span class="tag">communications</span>
+              <span class="tag">planning</span>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Community</div>
+            <h4>Champe Serves — President</h4>
+            <p>
+              Coordinated volunteer efforts and partnerships with local nonprofits and community groups.
+              Planned meetings and executed initiatives that focused on tangible impact.
+            </p>
+            <div class="tags">
+              <span class="tag">partnerships</span>
+              <span class="tag">volunteer-mgmt</span>
+              <span class="tag">impact</span>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Sports</div>
+            <h4>Youth Coach & Team Leadership</h4>
+            <p>
+              Mentored 50+ youth swimmers as a summer coach and currently coach youth basketball.
+              Focus on fundamentals, teamwork, strategy, and a positive environment.
+            </p>
+            <div class="tags">
+              <span class="tag">coaching</span>
+              <span class="tag">leadership</span>
+              <span class="tag">mentorship</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top:14px;">
+          <div class="tile">
+            <div class="meta">Campaign</div>
+            <h4>Local Political Campaign Support</h4>
+            <p>
+              Canvassed neighborhoods, made calls, and distributed materials while helping coordinate volunteers and communication.
+            </p>
+          </div>
+          <div class="tile">
+            <div class="meta">Operations</div>
+            <h4>Baseball Team Manager</h4>
+            <p>
+              Coordinated schedules and game logistics, and facilitated communication between coaches, players, and parents.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="sectionHead">
+          <div>
+            <h3>Projects</h3>
+            <p>Highlighting work that blends marketing, systems, and community impact. Swap these cards with your latest wins.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="meta">Blog</div>
+            <h4>Her Financial Future</h4>
+            <p>
+              A financial literacy blog focused on making personal finance clear, practical, and empowering.
+              (Add link + top posts + analytics here.)
+            </p>
+            <div class="tags">
+              <span class="tag">content</span>
+              <span class="tag">finance-literacy</span>
+              <span class="tag">growth</span>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Community</div>
+            <h4>Pack the Pantry</h4>
+            <p>
+              Donation-drive leadership: partnerships, volunteer coordination, and communication — with a goal of making participation easy and measurable.
+            </p>
+            <div class="tags">
+              <span class="tag">campaigns</span>
+              <span class="tag">community-impact</span>
+              <span class="tag">logistics</span>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Media</div>
+            <h4>Science Olympiad Media Management</h4>
+            <p>
+              Managed Instagram and communications with members, advisors, and leadership — keeping updates consistent and on-brand.
+            </p>
+            <div class="tags">
+              <span class="tag">social</span>
+              <span class="tag">branding</span>
+              <span class="tag">comms</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="sectionHead">
+          <div>
+            <h3>Skills</h3>
+            <p>Fast snapshot of what I bring to a team — customize these based on the role you’re applying for.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="meta">Business</div>
+            <h4>Planning & Coordination</h4>
+            <p>Event planning, fundraising, business planning/modeling, organizing teams and timelines.</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Communication</div>
+            <h4>People & Messaging</h4>
+            <p>Public speaking, group management, stakeholder communication, volunteer mobilization.</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Tools</div>
+            <h4>Digital & Productivity</h4>
+            <p>Comfortable across Windows/Mac/Chromebook, digital design workflows, fast learning new software.</p>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top:14px;">
+          <div class="tile">
+            <div class="meta">Languages</div>
+            <h4>Multilingual</h4>
+            <p>Fluent: English, Hindi • Conversational: Spanish</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Certification</div>
+            <h4>CPR Certified</h4>
+            <p>Cardiopulmonary Resuscitation (CPR), June 2023</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="sectionHead">
+          <div>
+            <h3>Contact</h3>
+            <p>Want a clean, professional version tailored to an internship, scholarship, or business pitch? I can customize this site to match the goal.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <div class="meta">Reach me</div>
+            <h4>Let’s talk</h4>
+            <p>
+              Email is the fastest way to reach me. If you add your LinkedIn + phone, the buttons below will work instantly.
+            </p>
+            <div class="heroActions" style="margin-top:14px;">
+              <a class="btn primary" href="mailto:pragyav2007123@gmail.com">Email me</a>
+              <a class="btn" href="#" id="linkedinBtn">LinkedIn</a>
+              <a class="btn" href="#" id="phoneBtn">Call/Text</a>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Quick form</div>
+            <h4>Send a message</h4>
+            <p style="margin-bottom:12px;">(This uses your email client — no backend required.)</p>
+            <form id="contactForm">
+              <label class="sr-only" for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required
+                     style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); outline:none;" />
+              <div style="height:10px"></div>
+              <label class="sr-only" for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Your message" required rows="5"
+                        style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); outline:none; resize:vertical;"></textarea>
+              <div style="height:12px"></div>
+              <button class="btn primary" type="submit">Open email draft</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="year"></span> Pragya Verma • Business-blue portfolio</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="#top">Back to top</a>
+          <a class="btn" href="#" id="printBtn">Print / Save as PDF</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll (respects reduced motion)
+    (function(){
+      const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if(!id || id === '#') return;
+          const el = document.querySelector(id);
+          if(!el) return;
+          e.preventDefault();
+          el.scrollIntoView({behavior: prefersReduce ? 'auto' : 'smooth', block:'start'});
+          history.replaceState(null, '', id);
+        });
+      });
+    })();
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Resume download — replace the URL/path if you host it
+    document.getElementById('downloadBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('To enable: upload your resume PDF and replace this button with a direct link (e.g., resume.pdf).');
+    });
+
+    // Print / Save
+    document.getElementById('printBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.print();
+    });
+
+    // Optional buttons placeholders
+    document.getElementById('linkedinBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Add your LinkedIn URL to this button (replace the href).');
+    });
+    document.getElementById('phoneBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Add your phone link like: href="tel:+1XXXXXXXXXX"');
+    });
+
+    // Contact form -> mailto
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const msg  = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent('Portfolio message from ' + (name || 'someone'));
+      const body = encodeURIComponent((name ? ('Name: ' + name + '\n\n') : '') + msg);
+      window.location.href = `mailto:pragyav2007123@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
