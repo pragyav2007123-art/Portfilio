@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Pragya Verma — business, marketing, and community impact portfolio" />
-  <title>Pragya Verma — Portfolio</title>
+  <meta name="description" content="Pack the Pantry 2.0 — a school-to-community donation platform" />
+  <title>Pack the Pantry 2.0 — Donation Drive Platform</title>
 
-  <!-- Single-file, professional business-blue aesthetic. No external dependencies. -->
+  <!-- Single-file donation site (professional business-blue). No external dependencies. -->
   <style>
     :root{
       --bg0:#050A18;
@@ -17,15 +17,22 @@
       --text:#EAF0FF;
       --muted: rgba(234,240,255,.72);
       --muted2: rgba(234,240,255,.58);
-      --brand:#2E6BFF;
-      --brand2:#45B2FF;
+
+      /* Your Pack the Pantry palette */
+      --brand:#59C1A9;   /* primary teal */
+      --brand2:#373669;  /* primary indigo */
+      --accent:#D7D628;  /* accent lime */
+      --accent2:#BE3273; /* accent magenta */
+
+      --good:#38d99f;
+      --warn:#ffcf5c;
       --shadow: 0 14px 40px rgba(0,0,0,.35);
       --shadow2: 0 10px 26px rgba(0,0,0,.28);
       --radius: 18px;
       --radius2: 26px;
       --max: 1120px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     *{ box-sizing:border-box; }
@@ -45,7 +52,6 @@
     a{ color: inherit; text-decoration:none; }
     a:hover{ opacity:.92; }
 
-    /* Subtle grid texture */
     .grid{
       pointer-events:none;
       position:fixed; inset:0;
@@ -57,7 +63,6 @@
       mask-image: radial-gradient(900px 520px at 50% 10%, rgba(0,0,0,1), transparent 65%);
     }
 
-    /* Layout */
     .wrap{ max-width:var(--max); margin:0 auto; padding: 0 22px; }
 
     header{
@@ -67,17 +72,9 @@
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
 
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 0;
-      gap: 14px;
-    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap: 14px; }
 
-    .brand{
-      display:flex; align-items:center; gap: 10px;
-      font-weight: 760;
-      letter-spacing: .2px;
-    }
+    .brand{ display:flex; align-items:center; gap: 10px; font-weight: 820; letter-spacing: .2px; }
 
     .logo{
       width: 36px; height: 36px; border-radius: 12px;
@@ -89,12 +86,7 @@
       position:relative;
       overflow:hidden;
     }
-    .logo::after{
-      content:"";
-      position:absolute; inset:-20px;
-      background: radial-gradient(180px 70px at 30% 30%, rgba(255,255,255,.28), transparent 60%);
-      transform: rotate(12deg);
-    }
+    .logo::after{ content:""; position:absolute; inset:-20px; background: radial-gradient(180px 70px at 30% 30%, rgba(255,255,255,.28), transparent 60%); transform: rotate(12deg); }
 
     .navlinks{ display:flex; gap: 10px; flex-wrap:wrap; justify-content:flex-end; }
     .navlinks a{
@@ -105,11 +97,7 @@
       transition: .18s ease;
       font-size: 14px;
     }
-    .navlinks a:hover{
-      border-color: rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-    }
+    .navlinks a:hover{ border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
@@ -121,7 +109,7 @@
       color: var(--text);
       box-shadow: var(--shadow2);
       transition: transform .16s ease, background .16s ease, border-color .16s ease;
-      font-weight: 650;
+      font-weight: 700;
       font-size: 14px;
       cursor:pointer;
       user-select:none;
@@ -132,17 +120,12 @@
       background: linear-gradient(135deg, rgba(46,107,255,.95), rgba(69,178,255,.85));
       box-shadow: 0 14px 35px rgba(46,107,255,.22);
     }
-
-    main{ padding: 34px 0 70px; }
-
-    /* Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 22px;
-      align-items: stretch;
-      padding: 22px 0 10px;
+    .btn.good{
+      border-color: rgba(56,217,159,.40);
+      background: linear-gradient(135deg, rgba(56,217,159,.55), rgba(69,178,255,.55));
     }
+
+    main{ padding: 30px 0 70px; }
 
     .card{
       border-radius: var(--radius2);
@@ -152,16 +135,18 @@
       overflow:hidden;
       position:relative;
     }
+    .card::before{ content:""; position:absolute; inset:-1px; background: radial-gradient(600px 220px at 20% 0%, rgba(46,107,255,.23), transparent 60%); pointer-events:none; }
 
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background: radial-gradient(600px 220px at 20% 0%, rgba(46,107,255,.23), transparent 60%);
-      pointer-events:none;
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items:stretch;
+      padding: 18px 0 10px;
     }
 
     .heroLeft{ padding: 26px; }
+
     .kicker{
       display:inline-flex;
       gap: 10px;
@@ -170,27 +155,25 @@
       border-radius: 999px;
       background: rgba(46,107,255,.10);
       border: 1px solid rgba(46,107,255,.28);
-      color: rgba(234,240,255,.85);
+      color: rgba(234,240,255,.88);
       font-size: 13px;
-      font-weight: 650;
+      font-weight: 700;
     }
-    .dot{
-      width: 8px; height: 8px; border-radius: 99px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 0 0 4px rgba(46,107,255,.16);
-    }
+
+    .dot{ width: 8px; height: 8px; border-radius: 99px; background: linear-gradient(135deg, var(--brand), var(--brand2)); box-shadow: 0 0 0 4px rgba(46,107,255,.16); }
 
     h1{ margin: 14px 0 10px; font-size: clamp(34px, 3.6vw, 48px); line-height:1.05; letter-spacing:-.6px; }
-    .sub{ color: var(--muted); font-size: 16px; line-height:1.55; max-width: 60ch; }
+    .sub{ color: var(--muted); font-size: 16px; line-height:1.55; max-width: 68ch; }
 
-    .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 18px; }
+    .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 16px; }
 
-    .heroMeta{
+    .stats{
       display:grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 16px;
     }
+
     .pill{
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
@@ -198,76 +181,9 @@
       padding: 12px 12px;
     }
     .pill .t{ font-size:12px; color: var(--muted2); text-transform:uppercase; letter-spacing:.12em; }
-    .pill .v{ margin-top:6px; font-weight:750; }
+    .pill .v{ margin-top:6px; font-weight:800; }
 
-    .heroRight{ padding: 22px; display:flex; flex-direction:column; gap: 12px; }
-
-    .profile{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 16px;
-      display:flex;
-      gap: 14px;
-      align-items:flex-start;
-    }
-    .avatar{
-      width: 56px; height:56px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.18);
-      background:
-        radial-gradient(20px 20px at 30% 30%, rgba(255,255,255,.55), transparent 60%),
-        linear-gradient(135deg, rgba(46,107,255,1), rgba(69,178,255,1));
-      box-shadow: 0 16px 28px rgba(46,107,255,.22);
-      flex: 0 0 auto;
-      position:relative;
-      overflow:hidden;
-    }
-    .avatar::after{
-      content:"";
-      position:absolute; inset:-40px;
-      background: radial-gradient(220px 80px at 25% 25%, rgba(255,255,255,.28), transparent 60%);
-      transform: rotate(14deg);
-    }
-
-    .profile h2{ margin:0; font-size:16px; letter-spacing:.1px; }
-    .profile p{ margin: 6px 0 0; color: var(--muted); line-height:1.5; font-size: 14px; }
-
-    .quickLinks{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .q{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 10px;
-      transition: .18s ease;
-    }
-    .q:hover{ transform: translateY(-1px); background: rgba(255,255,255,.07); }
-    .q span{ color: var(--muted); font-size: 13px; }
-    .q b{ font-size: 13px; }
-
-    /* Sections */
-    section{ padding: 22px 0; }
-    .sectionHead{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 14px;
-      margin: 12px 0 14px;
-    }
-    .sectionHead h3{ margin:0; font-size: 18px; letter-spacing:.2px; }
-    .sectionHead p{ margin:0; color: var(--muted); font-size: 14px; max-width: 70ch; }
-
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .grid3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+    .heroRight{ padding: 18px; display:flex; flex-direction:column; gap: 10px; }
 
     .tile{
       border-radius: var(--radius);
@@ -277,75 +193,81 @@
       position:relative;
       overflow:hidden;
     }
-    .tile::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(520px 200px at 20% 0%, rgba(46,107,255,.16), transparent 60%);
-      pointer-events:none;
-    }
+    .tile::before{ content:""; position:absolute; inset:-2px; background: radial-gradient(520px 200px at 20% 0%, rgba(46,107,255,.16), transparent 60%); pointer-events:none; }
 
-    .tile h4{ margin:0 0 6px; font-size: 15px; }
-    .tile .meta{ color: var(--muted2); font-size: 12px; text-transform:uppercase; letter-spacing:.10em; }
+    .tile h3, .tile h4{ margin:0 0 6px; }
+    .meta{ color: var(--muted2); font-size: 12px; text-transform:uppercase; letter-spacing:.10em; }
     .tile p{ margin: 10px 0 0; color: var(--muted); line-height:1.55; font-size: 14px; }
 
-    .tags{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
-    .tag{
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+
+    section{ padding: 22px 0; }
+    .sectionHead{ display:flex; align-items:flex-end; justify-content:space-between; gap: 14px; margin: 12px 0 14px; }
+    .sectionHead h2{ margin:0; font-size: 18px; letter-spacing:.2px; }
+    .sectionHead p{ margin:0; color: var(--muted); font-size: 14px; max-width: 72ch; }
+
+    .badge{
       font-family: var(--mono);
       font-size: 12px;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.05);
-      color: rgba(234,240,255,.78);
+      color: rgba(234,240,255,.80);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
     }
+    .badge .b{ width:8px; height:8px; border-radius:99px; background: var(--good); box-shadow: 0 0 0 4px rgba(56,217,159,.14); }
 
-    /* Timeline */
-    .timeline{ display:grid; gap: 12px; }
-    .item{
-      border-radius: var(--radius);
+    .list{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.55; }
+    .list li{ margin: 7px 0; }
+
+    .formRow{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline:none;
+      font: inherit;
+    }
+    textarea{ resize: vertical; }
+    label{ display:block; font-size: 13px; color: rgba(234,240,255,.82); margin: 10px 0 6px; }
+    .hint{ color: var(--muted2); font-size: 12px; margin-top: 6px; }
+
+    .divider{ height:1px; background: rgba(255,255,255,.10); margin: 14px 0; }
+
+    .progressWrap{
+      border-radius: 16px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
-      padding: 16px;
+      padding: 12px;
+      margin-top: 10px;
     }
-    .itemTop{ display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap; }
-    .role{ font-weight: 760; }
-    .org{ color: var(--muted); }
-    .when{ color: var(--muted2); font-size: 13px; white-space:nowrap; }
-    .bullets{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.55; }
-    .bullets li{ margin: 7px 0; }
+    .progressTop{ display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap; align-items:center; }
+    .progressBar{ height: 10px; border-radius: 999px; background: rgba(255,255,255,.10); overflow:hidden; margin-top: 10px; }
+    .progressFill{ height:100%; width: 0%; border-radius: 999px; background: linear-gradient(135deg, rgba(46,107,255,1), rgba(69,178,255,1)); }
 
-    /* Footer */
-    footer{
-      border-top: 1px solid rgba(255,255,255,.10);
-      background: rgba(5,10,24,.55);
-      padding: 22px 0;
-    }
-    .foot{
-      display:flex;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap:wrap;
-      align-items:center;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    footer{ border-top: 1px solid rgba(255,255,255,.10); background: rgba(5,10,24,.55); padding: 22px 0; }
+    .foot{ display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap; align-items:center; color: var(--muted); font-size: 13px; }
 
-    /* Mobile */
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
     @media (max-width: 920px){
       .hero{ grid-template-columns: 1fr; }
-      .heroMeta{ grid-template-columns: 1fr; }
       .grid3{ grid-template-columns: 1fr; }
       .grid2{ grid-template-columns: 1fr; }
-      .quickLinks{ grid-template-columns: 1fr; }
+      .stats{ grid-template-columns: 1fr; }
+      .formRow{ grid-template-columns: 1fr; }
     }
-
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
     }
-
-    /* Small helper */
-    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   </style>
 </head>
 
@@ -357,15 +279,18 @@
       <nav class="nav" aria-label="Primary">
         <a class="brand" href="#top">
           <span class="logo" aria-hidden="true"></span>
-          <span>Pragya Verma</span>
+          <span>Pack the Pantry <span style="color:rgba(234,240,255,.70); font-weight:750;">2.0</span></span>
         </a>
 
-        <div class="navlinks" id="navlinks">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#leadership">Leadership</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
+        <div class="navlinks">
+          <a href="#how">How it works</a>
+          <a href="#donate">Donate</a>
+          <a href="#volunteer">Volunteer</a>
+          <a href="#schools">Schools</a>
+          <a href="#helpers" id="helpersNav" style="display:none;">Helpers</a>
+          <a href="#leaderboard" id="leaderboardNav" style="display:none;">Leaderboard</a>
+          <a href="#sponsors">Sponsors</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
@@ -377,389 +302,506 @@
       <!-- HERO -->
       <div class="hero">
         <div class="card heroLeft">
-          <div class="kicker"><span class="dot" aria-hidden="true"></span> Business • Marketing • Community Impact</div>
-          <h1>Building programs, campaigns, and community initiatives that move people to action.</h1>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> A school-to-community donation drive platform</div>
+          <h1>Make donating simple. Make impact measurable.</h1>
           <p class="sub">
-            I’m Pragya — a driven, organized senior with leadership experience coordinating events, volunteer initiatives, and marketing work.
-            I’m passionate about business, ethical marketing, and community impact — and I love building clear systems that help teams execute.
+            Pack the Pantry 2.0 is the digital hub for collecting food + hygiene items across our school cluster.
+            Use this site to donate, sign up to volunteer, and track our drive progress in one place.
           </p>
 
           <div class="heroActions">
-            <a class="btn primary" href="#contact" aria-label="Jump to contact">Let’s connect</a>
-            <a class="btn" href="#projects" aria-label="See projects">View work</a>
-            <a class="btn" href="#" id="downloadBtn" aria-label="Download resume">Download resume (PDF)</a>
+            <a class="btn primary" href="#donate">Donate now</a>
+            <a class="btn good" href="#volunteer">Volunteer sign‑up</a>
+            <a class="btn" href="#schools">School drop‑off locations</a>
           </div>
 
-          <div class="heroMeta" aria-label="Quick highlights">
+          <div class="stats" aria-label="Drive highlights">
             <div class="pill">
-              <div class="t">Focus</div>
-              <div class="v">Marketing + Operations</div>
+              <div class="t">Goal</div>
+              <div class="v"><span id="goalText">1,000</span> items</div>
             </div>
             <div class="pill">
-              <div class="t">Strengths</div>
-              <div class="v">Leadership + Execution</div>
+              <div class="t">Collected</div>
+              <div class="v"><span id="collectedText">0</span> items</div>
             </div>
             <div class="pill">
-              <div class="t">Based in</div>
-              <div class="v">Aldie, VA</div>
+              <div class="t">Ends</div>
+              <div class="v"><span id="endDateText">(set date)</span></div>
             </div>
+          </div>
+
+          <div class="progressWrap" aria-label="Progress">
+            <div class="progressTop">
+              <div class="badge"><span class="b" aria-hidden="true"></span><span><b id="pctText">0%</b> of goal reached</span></div>
+              <div class="badge" title="Last updated"><span style="opacity:.75;">Updated:</span> <span id="updatedText"></span></div>
+            </div>
+            <div class="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progressFill" id="progressFill"></div>
+            </div>
+            <div class="hint">Tip: update the goal/collected numbers in the “Admin quick edit” panel.</div>
           </div>
         </div>
 
-        <aside class="card heroRight" aria-label="Profile">
-          <div class="profile">
-            <div class="avatar" aria-hidden="true"></div>
-            <div>
-              <h2>Professional snapshot</h2>
-              <p>
-                Senior at John Champe High School pursuing advanced coursework with hands-on experience across tutoring,
-                youth sports operations, and community-focused leadership.
-              </p>
-            </div>
-          </div>
+        <aside class="card heroRight" aria-label="Admin quick edit">
+          <div class="tile">
+            <div class="meta">Admin quick edit</div>
+            <h3 style="margin:6px 0 0;">Update drive numbers</h3>
+            <p style="margin-top:8px;">This is a lightweight, no-backend version: values save in your browser (localStorage). Perfect until you connect a real database.</p>
+            <div class="divider"></div>
 
-          <div class="quickLinks" aria-label="Quick links">
-            <a class="q" href="mailto:pragyav2007123@gmail.com"><b>Email</b><span>pragyav2007123@gmail.com</span></a>
-            <a class="q" href="#contact"><b>Phone</b><span>(add your number)</span></a>
-            <a class="q" href="#projects"><b>Featured</b><span>Her Financial Future</span></a>
-            <a class="q" href="https://www.linkedin.com/in/pragya-verma-74a86b305" target="_blank" rel="noopener"><b>LinkedIn</b><span>pragya-verma-74a86b305</span></a>
+            <div class="formRow">
+              <div>
+                <label for="goal">Goal (items)</label>
+                <input id="goal" type="number" min="0" placeholder="e.g., 1000" />
+              </div>
+              <div>
+                <label for="collected">Collected (items)</label>
+                <input id="collected" type="number" min="0" placeholder="e.g., 275" />
+              </div>
+            </div>
+
+            <div class="formRow">
+              <div>
+                <label for="endDate">Drive end date</label>
+                <input id="endDate" type="date" />
+              </div>
+              <div>
+                <label for="driveName">Drive label</label>
+                <input id="driveName" type="text" placeholder="e.g., Winter Drive" />
+              </div>
+            </div>
+
+            <div class="heroActions" style="margin-top:14px;">
+              <button class="btn primary" id="saveAdmin">Save</button>
+              <button class="btn" id="resetAdmin">Reset</button>
+            </div>
+            <div class="hint">When you’re ready for real tracking, connect this to Google Sheets, Airtable, or Firebase.</div>
           </div>
 
           <div class="tile">
-            <div class="meta">Currently</div>
-            <h4>DECA Vice President of Leadership</h4>
-            <p>
-              I run meeting logistics, calendars, communications, and documentation — so the officer team can move faster and execute cleaner.
-            </p>
+            <div class="meta">Most-needed items</div>
+            <h4>Quick donation checklist</h4>
+            <ul class="list">
+              <li>Hygiene: toothpaste, toothbrushes, deodorant, shampoo, soap</li>
+              <li>Food: peanut butter, pasta, rice, canned soups/veg, cereal</li>
+              <li>Baby: diapers, wipes (if accepted by your partner org)</li>
+            </ul>
+            <p class="hint">Please donate new/unopened items. Avoid expired goods.</p>
           </div>
         </aside>
       </div>
 
-      <!-- ABOUT -->
-      <section id="about">
+      <!-- HOW IT WORKS -->
+      <section id="how">
         <div class="sectionHead">
           <div>
-            <h3>About</h3>
-            <p>What I’m about: organized execution, strong communication, and marketing that’s responsible and measurable.</p>
+            <h2>How it works</h2>
+            <p>Choose your role — donate, volunteer, or sponsor — and we’ll route your support to the right place.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="meta">Step 1</div>
+            <h4>Pick a way to help</h4>
+            <p>Donate items, contribute funds, sign up to volunteer, or sponsor a school’s collection goal.</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Step 2</div>
+            <h4>Drop off or schedule</h4>
+            <p>Use the Schools page to find drop-off sites. Volunteers can sign up for sorting/packing shifts.</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Step 3</div>
+            <h4>Track impact</h4>
+            <p>We publish totals and updates so the whole community can see progress and celebrate milestones.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- DONATE -->
+      <section id="donate">
+        <div class="sectionHead">
+          <div>
+            <h2>Donate</h2>
+            <p>Choose items, choose a school, and get a clear plan for drop-off. (You can link Amazon wishlists or a donation page here.)</p>
           </div>
         </div>
 
         <div class="grid2">
           <div class="tile">
-            <div class="meta">Summary</div>
-            <h4>How I work</h4>
-            <p>
-              I’m happiest when a big goal becomes a clear plan: timelines, roles, outreach, and a system that keeps people aligned.
-              I’ve led volunteer initiatives and coordinated events where details matter — and where good messaging makes participation easy.
-            </p>
-            <div class="tags" aria-label="Strength tags">
-              <span class="tag">event-planning</span>
-              <span class="tag">community-partnerships</span>
-              <span class="tag">marketing-ops</span>
-              <span class="tag">team-leadership</span>
-            </div>
+            <div class="meta">Donate items</div>
+            <h4>Item drop-off planner</h4>
+            <form id="donateForm">
+              <label for="donorName">Your name</label>
+              <input id="donorName" name="donorName" placeholder="Optional" />
+
+              <div class="formRow">
+                <div>
+                  <label for="donorEmail">Email</label>
+                  <input id="donorEmail" name="donorEmail" type="email" placeholder="Optional" />
+                </div>
+                <div>
+                  <label for="school">Choose a school</label>
+                  <select id="school" name="school" required>
+                    <option value="">Select…</option>
+                    <option>John Champe High School</option>
+                    <option>(Elementary) School A</option>
+                    <option>(Elementary) School B</option>
+                    <option>(Elementary) School C</option>
+                    <option>(Elementary) School D</option>
+                    <option>Community Drop-off Partner</option>
+                  </select>
+                </div>
+              </div>
+
+              <label for="items">What are you donating?</label>
+              <textarea id="items" name="items" rows="4" placeholder="Example: 10 toothbrushes, 8 cans of soup, 6 deodorants" required></textarea>
+
+              <label for="notes">Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Any questions or special drop-off notes?"></textarea>
+
+              <div class="heroActions" style="margin-top:14px;">
+                <button class="btn primary" type="submit">Get drop-off instructions</button>
+                <a class="btn" href="#schools">View all locations</a>
+              </div>
+              <p class="hint">This will open a pre-filled email draft to your Pack the Pantry inbox (no backend required).</p>
+            </form>
           </div>
 
           <div class="tile">
-            <div class="meta">Education</div>
+            <div class="meta">Donate funds</div>
+            <h4>Support with a monetary gift</h4>
+            <p>
+              Funds help us buy bulk items that are most needed (and fill gaps if a category is short).
+              Add your official donation link below.
+            </p>
+            <div class="divider"></div>
+            <div class="grid2">
+              <div class="tile" style="padding:14px;">
+                <div class="meta">Option 1</div>
+                <h4 style="margin:6px 0 0;">Donation page</h4>
+                <p style="margin-top:8px;">Replace this button with your payment link (Venmo/PayPal/GoFundMe).</p>
+                <div class="heroActions" style="margin-top:12px;">
+                  <a class="btn primary" href="#" id="donationLink">Add donation link</a>
+                </div>
+              </div>
+              <div class="tile" style="padding:14px;">
+                <div class="meta">Option 2</div>
+                <h4 style="margin:6px 0 0;">Wishlist</h4>
+                <p style="margin-top:8px;">Link an Amazon wishlist for supporters who prefer shipping directly.</p>
+                <div class="heroActions" style="margin-top:12px;">
+                  <a class="btn" href="#" id="wishlistLink">Add wishlist link</a>
+                </div>
+              </div>
+            </div>
+            <p class="hint">If you tell me what platform you’re using, I can wire the exact link format.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VOLUNTEER -->
+      <section id="volunteer">
+        <div class="sectionHead">
+          <div>
+            <h2>Volunteer</h2>
+            <p>Sign up for a shift — collection, sorting, packing, or delivery support. You can also link a Google Form here.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <div class="meta">Volunteer sign-up</div>
+            <h4>Choose a role + time</h4>
+            <form id="volunteerForm">
+              <div class="formRow">
+                <div>
+                  <label for="volName">Name</label>
+                  <input id="volName" required placeholder="Full name" />
+                </div>
+                <div>
+                  <label for="volEmail">Email</label>
+                  <input id="volEmail" type="email" required placeholder="you@example.com" />
+                </div>
+              </div>
+
+              <div class="formRow">
+                <div>
+                  <label for="role">Volunteer role</label>
+                  <select id="role" required>
+                    <option value="">Select…</option>
+                    <option>School collection / bin monitoring</option>
+                    <option>Sorting & packing (warehouse day)</option>
+                    <option>Event support (table / signage / check-in)</option>
+                    <option>Delivery support</option>
+                    <option>Outreach / sponsorships</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="availability">Availability</label>
+                  <select id="availability" required>
+                    <option value="">Select…</option>
+                    <option>Weekday after school</option>
+                    <option>Weekend morning</option>
+                    <option>Weekend afternoon</option>
+                    <option>Flexible</option>
+                  </select>
+                </div>
+              </div>
+
+              <label for="volNotes">Notes (optional)</label>
+              <textarea id="volNotes" rows="3" placeholder="Any constraints, preferred days, or questions?"></textarea>
+
+              <div class="heroActions" style="margin-top:14px;">
+                <button class="btn primary" type="submit">Submit sign-up</button>
+                <a class="btn" href="#contact">Ask a question</a>
+              </div>
+              <p class="hint">This opens a pre-filled email draft so you don’t need a backend yet.</p>
+            </form>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Volunteer teams</div>
+            <h4>What volunteers do</h4>
+            <ul class="list">
+              <li><b>Collectors:</b> keep bins organized, record quick counts, and share weekly updates.</li>
+              <li><b>Packers:</b> sort items into categories, check expiration dates, and build family-ready bundles.</li>
+              <li><b>Outreach:</b> recruit sponsors, share flyers, and help schools compete in friendly challenges.</li>
+            </ul>
+            <div class="divider"></div>
+            <div class="badge" style="margin-top:4px;"><span class="b" style="background:var(--warn); box-shadow:0 0 0 4px rgba(255,207,92,.14);"></span><span><b>Reminder:</b> Bring a student ID + sign in at check-in.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCHOOLS -->
+      <section id="schools">
+        <div class="sectionHead">
+          <div>
+            <h2>Schools</h2>
+            <p>Drop-off locations + friendly competition. Replace the placeholders with your real cluster school names + addresses.</p>
+          </div>
+          <div class="badge"><span class="b" aria-hidden="true"></span><span>Cluster drive</span></div>
+        </div>
+
+        <div class="grid3">
+          <div class="tile">
+            <div class="meta">High School Hub</div>
             <h4>John Champe High School</h4>
-            <p>
-              Graduation: June 2026 • GPA 4.11 • Pursuing Advanced Studies Diploma<br/>
-              Relevant coursework: AP Seminar, AP Research, AP English Language, AP Psychology, AP Economics (Macro & Micro), AP Statistics, AP Spanish 1–3
-            </p>
-            <div class="tags" aria-label="Coursework tags">
-              <span class="tag">research</span>
-              <span class="tag">stats</span>
-              <span class="tag">economics</span>
-              <span class="tag">communication</span>
+            <p><b>Drop-off:</b> (Add office/room) • <b>Hours:</b> (Add hours)</p>
+            <p class="hint">Coordinator: (Name) • Contact: (Email)</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Elementary</div>
+            <h4>School A</h4>
+            <p><b>Drop-off:</b> (Add location) • <b>Hours:</b> (Add hours)</p>
+            <p class="hint">Coordinator: (Name) • Contact: (Email)</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Elementary</div>
+            <h4>School B</h4>
+            <p><b>Drop-off:</b> (Add location) • <b>Hours:</b> (Add hours)</p>
+            <p class="hint">Coordinator: (Name) • Contact: (Email)</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Elementary</div>
+            <h4>School C</h4>
+            <p><b>Drop-off:</b> (Add location) • <b>Hours:</b> (Add hours)</p>
+            <p class="hint">Coordinator: (Name) • Contact: (Email)</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Elementary</div>
+            <h4>School D</h4>
+            <p><b>Drop-off:</b> (Add location) • <b>Hours:</b> (Add hours)</p>
+            <p class="hint">Coordinator: (Name) • Contact: (Email)</p>
+          </div>
+          <div class="tile">
+            <div class="meta">Community Partner</div>
+            <h4>FUELED Warehouse / Partner Org</h4>
+            <p><b>Drop-off:</b> (Add partner location) • <b>Days:</b> (Add days)</p>
+            <p class="hint">For bulk drop-offs and packing days.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- HELPERS (appears when the round is live) -->
+      <section id="helpers" style="display:none;">
+        <div class="sectionHead">
+          <div>
+            <h2>Helpers</h2>
+            <p>Once the round starts, each school will have assigned student helpers here. For privacy, we’ll use an “Email helper” button (no emails displayed).</p>
+          </div>
+        </div>
+
+        <div class="grid3" id="helpersGrid">
+          <div class="tile">
+            <div class="meta">School (TBD)</div>
+            <h4>Helpers coming soon</h4>
+            <p class="hint">When helpers are assigned, we’ll add their name + picture and an Email Helper button.</p>
+            <div class="heroActions" style="margin-top:12px;">
+              <button class="btn" type="button" disabled style="opacity:.65;">Email helper</button>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="meta">School (TBD)</div>
+            <h4>Helpers coming soon</h4>
+            <p class="hint">This section is designed to be updated quickly once assignments are finalized.</p>
+            <div class="heroActions" style="margin-top:12px;">
+              <button class="btn" type="button" disabled style="opacity:.65;">Email helper</button>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="meta">School (TBD)</div>
+            <h4>Helpers coming soon</h4>
+            <p class="hint">We’ll group helpers by school as soon as the round is live.</p>
+            <div class="heroActions" style="margin-top:12px;">
+              <button class="btn" type="button" disabled style="opacity:.65;">Email helper</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- EXPERIENCE -->
-      <section id="experience">
+      <!-- LEADERBOARD (appears when the round is live) -->
+      <section id="leaderboard" style="display:none;">
         <div class="sectionHead">
           <div>
-            <h3>Experience</h3>
-            <p>Hands-on roles that strengthened my operations, communication, and marketing execution.</p>
+            <h2>Leaderboard</h2>
+            <p>Friendly competition will appear here when the round starts (ranked by items or points).</p>
           </div>
         </div>
 
-        <div class="timeline" role="list">
-          <div class="item" role="listitem">
-            <div class="itemTop">
-              <div>
-                <div class="role">Intern</div>
-                <div class="org">Tellius (AI data analytics) • Remote</div>
-              </div>
-              <div class="when">Apr 2025 – Present</div>
-            </div>
-            <ul class="bullets">
-              <li>Audited SEO across 50+ blogs & backlinks; analyzed GPT vs. organic traffic using Google Analytics 4.</li>
-              <li>Published 7 posts and contributed to a 40%+ increase in site visits over 3 months.</li>
-              <li>Optimized internal linking strategies and implemented keyword-anchored URLs for analytics-related content.</li>
-              <li>Supported digital resources such as product tour pages and demo videos; gained exposure to pharma/CPG use cases.</li>
-            </ul>
-          </div>
+        <div class="tile">
+          <div class="meta">Standings</div>
+          <h4>Launching with Round 2</h4>
+          <p class="hint">Once the drive begins, schools will show up here automatically and we’ll post weekly updates.</p>
 
-          <div class="item" role="listitem">
-            <div class="itemTop">
-              <div>
-                <div class="role">Intern</div>
-                <div class="org">Leesburg Economic Development • Leesburg, VA</div>
-              </div>
-              <div class="when">Summer 2025</div>
-            </div>
-            <ul class="bullets">
-              <li>Built a HubSpot CRM and created “Start Your Business” materials to support local entrepreneurs.</li>
-              <li>Led the Lafayette wreath campaign; drafted outreach documents and presented projects to the Economic Development board.</li>
-              <li>Assisted in organizing public events and business engagement initiatives; analyzed demographic and industry data to support strategies.</li>
-            </ul>
-          </div>
+          <div class="divider"></div>
 
-          <div class="item" role="listitem">
-            <div class="itemTop">
-              <div>
-                <div class="role">Intern & Tutor</div>
-                <div class="org">MyExamsPrep • Ashburn, VA</div>
-              </div>
-              <div class="when">Summer 2022 / 2023</div>
-            </div>
-            <ul class="bullets">
-              <li>Provided academic support to K–8 students across subjects; adapted teaching methods to individual learning styles.</li>
-              <li>Balanced instructional work with administrative, clerical, and data-entry responsibilities across multiple software tools.</li>
-              <li>Graded worksheets and practice tests across difficulty levels; ensured accurate results and clear communication.</li>
-            </ul>
-          </div>
-
-          <div class="item" role="listitem">
-            <div class="itemTop">
-              <div>
-                <div class="role">Marketing / Event Coordinator</div>
-                <div class="org">Youth Summer Swim Team • Aldie, VA</div>
-              </div>
-              <div class="when">Jun 2024 – Aug 2024</div>
-            </div>
-            <ul class="bullets">
-              <li>Organized fundraisers, managed concessions, and coordinated meet logistics and team activities.</li>
-              <li>Supported communications and engagement to make participation seamless for families and athletes.</li>
-            </ul>
-          </div>
-
-          <div class="item" role="listitem">
-            <div class="itemTop">
-              <div>
-                <div class="role">Childcare Provider</div>
-                <div class="org">Neighborhood families • Ashburn/Aldie, VA</div>
-              </div>
-              <div class="when">Summer 2019 – Present</div>
-            </div>
-            <ul class="bullets">
-              <li>Provided reliable childcare services for multiple families with a focus on safety, trust, and communication.</li>
-              <li>Planned engaging, educational activities that supported learning and positive routines.</li>
-            </ul>
+          <div style="overflow:auto;">
+            <table style="width:100%; border-collapse:collapse; min-width: 520px;">
+              <thead>
+                <tr style="text-align:left; color: rgba(234,240,255,.82); font-size: 12px; text-transform:uppercase; letter-spacing:.10em;">
+                  <th style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Rank</th>
+                  <th style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">School</th>
+                  <th style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Items</th>
+                  <th style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.10);">Points</th>
+                </tr>
+              </thead>
+              <tbody id="lbBody">
+                <tr>
+                  <td style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.08); font-family: var(--mono);">#—</td>
+                  <td style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.08); font-weight:800;">School (TBD)</td>
+                  <td style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.08);">—</td>
+                  <td style="padding:10px 8px; border-bottom:1px solid rgba(255,255,255,.08);">—</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <!-- LEADERSHIP -->
-      <section id="leadership">
+      <!-- SPONSORS -->
+      <section id="sponsors">
         <div class="sectionHead">
           <div>
-            <h3>Leadership & Service</h3>
-            <p>Leadership roles where I built systems, mobilized volunteers, and delivered measurable community impact.</p>
+            <h2>Sponsors</h2>
+            <p>Businesses can sponsor bins, match donations, or fund high-need items. We’ll recognize sponsors on this page and in our event materials.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="tile">
+            <div class="meta">Sponsor options</div>
+            <h4>Ways to sponsor</h4>
+            <ul class="list">
+              <li><b>Match:</b> match item counts or funds up to a cap.</li>
+              <li><b>Adopt a school:</b> sponsor a school’s goal (bins, flyers, incentives).</li>
+              <li><b>In-kind:</b> donate items, storage, printing, or refreshments for volunteers.</li>
+            </ul>
+            <p class="hint">Add sponsor tiers (Bronze/Silver/Gold) when you’re ready.</p>
+          </div>
+
+          <div class="tile">
+            <div class="meta">Sponsor interest</div>
+            <h4>Request a sponsor packet</h4>
+            <form id="sponsorForm">
+              <label for="biz">Business / Organization</label>
+              <input id="biz" required placeholder="Business name" />
+
+              <div class="formRow">
+                <div>
+                  <label for="contactName">Contact name</label>
+                  <input id="contactName" required placeholder="Full name" />
+                </div>
+                <div>
+                  <label for="contactEmail">Contact email</label>
+                  <input id="contactEmail" type="email" required placeholder="name@company.com" />
+                </div>
+              </div>
+
+              <label for="interest">What are you interested in?</label>
+              <select id="interest" required>
+                <option value="">Select…</option>
+                <option>Matching donations</option>
+                <option>Adopt a school goal</option>
+                <option>In-kind contribution</option>
+                <option>Not sure — send options</option>
+              </select>
+
+              <label for="sponsorNotes">Notes</label>
+              <textarea id="sponsorNotes" rows="3" placeholder="Anything we should know?"></textarea>
+
+              <div class="heroActions" style="margin-top:14px;">
+                <button class="btn primary" type="submit">Contact the team</button>
+                <a class="btn" href="#contact">General contact</a>
+              </div>
+              <p class="hint">This also opens a pre-filled email draft (no backend required).</p>
+            </form>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="sectionHead" style="margin-top:0;">
+          <div>
+            <h2 style="font-size:16px;">Sponsor recognition</h2>
+            <p>Add sponsor logos here. (You can paste SVGs or use image URLs once you have them.)</p>
           </div>
         </div>
 
         <div class="grid3">
-          <div class="tile">
-            <div class="meta">DECA</div>
-            <h4>Vice President of Leadership (State Qualifier)</h4>
-            <p>
-              Acts as organizer and record-keeper for the officer team while promoting leadership development.
-              Responsibilities include detailed meeting notes, agendas, a deadlines calendar, attendance tracking, document organization, and on-time chapter communications.
-            </p>
-            <div class="tags">
-              <span class="tag">operations</span>
-              <span class="tag">comms</span>
-              <span class="tag">planning</span>
-            </div>
-          </div>
-
-          <div class="tile">
-            <div class="meta">Service</div>
-            <h4>Champe Serves — President</h4>
-            <p>
-              Coordinated volunteer efforts and partnered with local organizations (including Anna Sudha Community Kitchen, Foster Youth Innovation, and a local women’s shelter).
-              Led planning and execution for high-impact service projects.
-            </p>
-            <div class="tags">
-              <span class="tag">partnerships</span>
-              <span class="tag">volunteer-mgmt</span>
-              <span class="tag">event-planning</span>
-            </div>
-          </div>
-
-          <div class="tile">
-            <div class="meta">Impact</div>
-            <h4>Pack the Pantry — Initiative Lead</h4>
-            <p>
-              Raised $1,200+ and collected 200+ lbs of food and hygiene items to support Loudoun County families.
-              Partnered with the FUELED warehouse and coordinated 100+ volunteers for fundraising, collection, and packing events.
-            </p>
-            <div class="tags">
-              <span class="tag">campaigns</span>
-              <span class="tag">fundraising</span>
-              <span class="tag">logistics</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid2" style="margin-top:14px;">
-          <div class="tile">
-            <div class="meta">Leadership</div>
-            <h4>Cancer Kids First — Vice President</h4>
-            <p>
-              Revived the chapter to 70+ members; led campaigns for Childhood Cancer Month; organized monthly meetings; managed social media and nonprofit communications.
-            </p>
-          </div>
-          <div class="tile">
-            <div class="meta">Programs</div>
-            <h4>Virginia Girls State Delegate</h4>
-            <p>
-              Competitively selected (11/60+) for a state government leadership program; served in the House of Delegates and authored/debated mock legislation.
-            </p>
-          </div>
-        </div>
-
-        <div class="grid2" style="margin-top:14px;">
-          <div class="tile">
-            <div class="meta">Sports</div>
-            <h4>Youth Coach & Team Leadership</h4>
-            <p>
-              Volunteer youth swim coach (mentored 50+ swimmers) and current volunteer youth basketball coach.
-              Focus on skill development, teamwork, and a positive environment.
-            </p>
-          </div>
-          <div class="tile">
-            <div class="meta">Operations</div>
-            <h4>Baseball Team Manager</h4>
-            <p>
-              Coordinates practice schedules and game logistics, facilitating communication between coaches, players, and parents.
-            </p>
-          </div>
+          <div class="tile"><div class="meta">Gold</div><h4>(Sponsor name)</h4><p class="hint">Logo + short line</p></div>
+          <div class="tile"><div class="meta">Silver</div><h4>(Sponsor name)</h4><p class="hint">Logo + short line</p></div>
+          <div class="tile"><div class="meta">Bronze</div><h4>(Sponsor name)</h4><p class="hint">Logo + short line</p></div>
         </div>
       </section>
 
-      <!-- PROJECTS -->
-      <section id="projects">
+      <!-- FAQ -->
+      <section id="faq">
         <div class="sectionHead">
           <div>
-            <h3>Projects</h3>
-            <p>Work that blends marketing, systems, and community impact. (Swap these cards with case studies + links.)</p>
+            <h2>FAQ</h2>
+            <p>Quick answers for donors, families, and volunteers.</p>
           </div>
         </div>
 
-        <div class="grid3">
+        <div class="grid2">
           <div class="tile">
-            <div class="meta">Website / Content</div>
-            <h4>Her Financial Future</h4>
-            <p>
-              Personal finance literacy blog focused on making money topics practical and empowering for teens.
-              Add: best posts, growth metrics, and your favorite writing samples.
-            </p>
-            <div class="tags">
-              <span class="tag">content-strategy</span>
-              <span class="tag">writing</span>
-              <span class="tag">finance-literacy</span>
-            </div>
+            <div class="meta">Donations</div>
+            <h4>What items are accepted?</h4>
+            <p>New/unopened food + hygiene items. Please avoid expired items. If you’re unsure, email us from the Donate section and we’ll confirm.</p>
+            <div class="divider"></div>
+            <h4>Can I donate money instead?</h4>
+            <p>Yes — add your official donation link in the Donate section (or tell me what you’re using and I’ll wire it).</p>
           </div>
 
           <div class="tile">
-            <div class="meta">Marketing</div>
-            <h4>Tellius SEO & Content Growth</h4>
-            <p>
-              SEO audit and publishing workflow: 50+ pages reviewed, 7 posts shipped, and 40%+ traffic growth in 3 months.
-              Add: 1–2 screenshots (GA4/Search Console) and a short “what I changed” breakdown.
-            </p>
-            <div class="tags">
-              <span class="tag">seo</span>
-              <span class="tag">ga4</span>
-              <span class="tag">growth</span>
-            </div>
-          </div>
-
-          <div class="tile">
-            <div class="meta">Community</div>
-            <h4>Pack the Pantry</h4>
-            <p>
-              Fundraising + logistics initiative supporting food security: $1,200+ raised, 200+ lbs collected, 100+ volunteers coordinated.
-              Add: partners, timeline, and outcomes.
-            </p>
-            <div class="tags">
-              <span class="tag">fundraising</span>
-              <span class="tag">partnerships</span>
-              <span class="tag">ops</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills">
-        <div class="sectionHead">
-          <div>
-            <h3>Skills</h3>
-            <p>A fast snapshot of what I bring — built through leadership, marketing, and community work.</p>
-          </div>
-        </div>
-
-        <div class="grid3">
-          <div class="tile">
-            <div class="meta">Business</div>
-            <h4>Planning & Execution</h4>
-            <p>Event planning, fundraising, business planning/modeling, team coordination, and timeline management.</p>
-          </div>
-          <div class="tile">
-            <div class="meta">Communication</div>
-            <h4>People & Leadership</h4>
-            <p>Public speaking, group management, stakeholder communication, volunteer mobilization, and collaboration.</p>
-          </div>
-          <div class="tile">
-            <div class="meta">Tools</div>
-            <h4>Digital Fluency</h4>
-            <p>Comfortable across Windows/Mac/Chromebook; strong computer efficiency; experience supporting digital design workflows.</p>
-          </div>
-        </div>
-
-        <div class="grid2" style="margin-top:14px;">
-          <div class="tile">
-            <div class="meta">Languages</div>
-            <h4>English • Hindi • Spanish</h4>
-            <p>Fluent: English, Hindi • Conversational: Spanish</p>
-          </div>
-          <div class="tile">
-            <div class="meta">Certification</div>
-            <h4>CPR Certified</h4>
-            <p>Cardiopulmonary Resuscitation (CPR), June 2023</p>
-          </div>
-        </div>
-
-        <div class="grid2" style="margin-top:14px;">
-          <div class="tile">
-            <div class="meta">Awards</div>
-            <h4>Highlights</h4>
-            <p>
-              AP Scholar with Distinction • AP Seminar & Research Certificate • DECA District Leadership Conference (1st place) • DECA THRIVE Leadership Academy Graduate • National Honor Society Inductee • LCPS CTE Workforce Summit Nominee/Attendee
-            </p>
-          </div>
-          <div class="tile">
-            <div class="meta">Athletics</div>
-            <h4>Team Captain</h4>
-            <p>
-              John Champe Girls Basketball captain (2 consecutive years) • Raised $500 for the program.
-            </p>
+            <div class="meta">Volunteers</div>
+            <h4>Do I need service hours?</h4>
+            <p>We can verify hours when you sign in at volunteer shifts. Ask a coordinator for details.</p>
+            <div class="divider"></div>
+            <h4>How do I sign up?</h4>
+            <p>Use the Volunteer form — it creates a pre-filled email draft so we can schedule you quickly.</p>
           </div>
         </div>
       </section>
@@ -768,39 +810,39 @@
       <section id="contact">
         <div class="sectionHead">
           <div>
-            <h3>Contact</h3>
-            <p>Want a clean, professional version tailored to an internship, scholarship, or business pitch? I can customize this site to match the goal.</p>
+            <h2>Contact</h2>
+            <p>Questions? Partnerships? School coordinators? Reach out — we’ll respond fast.</p>
           </div>
         </div>
 
         <div class="grid2">
           <div class="tile">
-            <div class="meta">Reach me</div>
-            <h4>Let’s talk</h4>
-            <p>
-              Email is the fastest way to reach me. If you add your LinkedIn + phone, the buttons below will work instantly.
-            </p>
+            <div class="meta">Primary</div>
+            <h4>Pack the Pantry Team</h4>
+            <p><b>Email:</b> <a href="mailto:packthepantry2.0@gmail.com">packthepantry2.0@gmail.com</a> (replace if needed)</p>
+            <p class="hint">If you don’t have a dedicated inbox yet, make one so volunteers don’t email your personal account.</p>
+
             <div class="heroActions" style="margin-top:14px;">
-              <a class="btn primary" href="mailto:pragyav2007123@gmail.com">Email me</a>
-              <a class="btn" href="#" id="linkedinBtn">LinkedIn</a>
-              <a class="btn" href="#" id="phoneBtn">Call/Text</a>
+              <a class="btn primary" href="mailto:packthepantry2.0@gmail.com">Email us</a>
+              <a class="btn" href="#schools">Locations</a>
+              <a class="btn" href="#sponsors">Sponsor</a>
             </div>
           </div>
 
           <div class="tile">
-            <div class="meta">Quick form</div>
-            <h4>Send a message</h4>
-            <p style="margin-bottom:12px;">(This uses your email client — no backend required.)</p>
+            <div class="meta">Message</div>
+            <h4>Send a note</h4>
+            <p style="margin-bottom:12px;">This opens your email client (no backend required).</p>
             <form id="contactForm">
-              <label class="sr-only" for="name">Name</label>
-              <input id="name" name="name" placeholder="Your name" required
-                     style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); outline:none;" />
+              <label class="sr-only" for="cName">Name</label>
+              <input id="cName" placeholder="Your name" required />
+              <label class="sr-only" for="cMsg">Message</label>
               <div style="height:10px"></div>
-              <label class="sr-only" for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Your message" required rows="5"
-                        style="width:100%; padding:12px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--text); outline:none; resize:vertical;"></textarea>
-              <div style="height:12px"></div>
-              <button class="btn primary" type="submit">Open email draft</button>
+              <textarea id="cMsg" rows="5" placeholder="Your message" required></textarea>
+              <div class="heroActions" style="margin-top:14px;">
+                <button class="btn primary" type="submit">Open email draft</button>
+                <a class="btn" href="#top">Back to top</a>
+              </div>
             </form>
           </div>
         </div>
@@ -812,7 +854,7 @@
   <footer>
     <div class="wrap">
       <div class="foot">
-        <div>© <span id="year"></span> Pragya Verma • Business-blue portfolio</div>
+        <div>© <span id="year"></span> Pack the Pantry 2.0 • Built for community impact</div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
           <a class="btn" href="#top">Back to top</a>
           <a class="btn" href="#" id="printBtn">Print / Save as PDF</a>
@@ -822,6 +864,10 @@
   </footer>
 
   <script>
+    // ROUND TOGGLE
+    // Set to true when Round 2 begins (end of this month). When true, Helpers + Leaderboard tabs/sections appear.
+    const ROUND_LIVE = false;
+
     // Smooth scroll (respects reduced motion)
     (function(){
       const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -841,38 +887,238 @@
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Resume download — replace the URL/path if you host it
-    document.getElementById('downloadBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('To enable: upload your resume PDF and replace this button with a direct link (e.g., resume.pdf).');
-    });
-
     // Print / Save
     document.getElementById('printBtn').addEventListener('click', (e) => {
       e.preventDefault();
       window.print();
     });
 
-    // Optional buttons placeholders
-    document.getElementById('linkedinBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Add your LinkedIn URL to this button (replace the href).');
-    });
-    document.getElementById('phoneBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('Add your phone link like: href="tel:+1XXXXXXXXXX"');
+    // --- Progress + Admin (localStorage) ---
+    const KEY = 'ptp2_drive_v1';
+    const fmt = (n) => {
+      const x = Number(n);
+      if(!Number.isFinite(x)) return '0';
+      return x.toLocaleString();
+    };
+
+    function getState(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return { goal: 1000, collected: 0, endDate: '', driveName: '' };
+        const parsed = JSON.parse(raw);
+        return {
+          goal: Number(parsed.goal ?? 1000),
+          collected: Number(parsed.collected ?? 0),
+          endDate: String(parsed.endDate ?? ''),
+          driveName: String(parsed.driveName ?? '')
+        };
+      }catch(_){
+        return { goal: 1000, collected: 0, endDate: '', driveName: '' };
+      }
+    }
+
+    function setState(s){
+      localStorage.setItem(KEY, JSON.stringify({
+        goal: Math.max(0, Number(s.goal || 0)),
+        collected: Math.max(0, Number(s.collected || 0)),
+        endDate: s.endDate || '',
+        driveName: (s.driveName || '').trim()
+      }));
+    }
+
+    function render(){
+      const s = getState();
+      const goal = Math.max(0, Number(s.goal || 0));
+      const collected = Math.max(0, Number(s.collected || 0));
+      const pct = goal > 0 ? Math.min(100, Math.round((collected/goal)*100)) : 0;
+
+      document.getElementById('goalText').textContent = fmt(goal);
+      document.getElementById('collectedText').textContent = fmt(collected);
+      document.getElementById('pctText').textContent = pct + '%';
+
+      const endEl = document.getElementById('endDateText');
+      endEl.textContent = s.endDate ? new Date(s.endDate + 'T00:00:00').toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : '(set date)';
+
+      const fill = document.getElementById('progressFill');
+      fill.style.width = pct + '%';
+      const bar = document.querySelector('.progressBar');
+      bar.setAttribute('aria-valuenow', String(pct));
+
+      // Prefill admin inputs
+      document.getElementById('goal').value = String(goal || '');
+      document.getElementById('collected').value = String(collected || '');
+      document.getElementById('endDate').value = s.endDate || '';
+      document.getElementById('driveName').value = s.driveName || '';
+
+      // Updated time
+      document.getElementById('updatedText').textContent = new Date().toLocaleString(undefined, {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+
+      // Optional: show drive label in title
+      if(s.driveName){
+        document.title = `Pack the Pantry 2.0 — ${s.driveName}`;
+      } else {
+        document.title = 'Pack the Pantry 2.0 — Donation Drive Platform';
+      }
+    }
+
+    document.getElementById('saveAdmin').addEventListener('click', () => {
+      const goal = document.getElementById('goal').value;
+      const collected = document.getElementById('collected').value;
+      const endDate = document.getElementById('endDate').value;
+      const driveName = document.getElementById('driveName').value;
+      setState({ goal, collected, endDate, driveName });
+      render();
     });
 
-    // Contact form -> mailto
+    document.getElementById('resetAdmin').addEventListener('click', () => {
+      localStorage.removeItem(KEY);
+      render();
+    });
+
+    // --- Forms: open pre-filled email drafts (no backend needed) ---
+    const TEAM_EMAIL = 'packthepantry2.0@gmail.com'; // replace if needed
+
+    function openMail(subject, body){
+      const s = encodeURIComponent(subject);
+      const b = encodeURIComponent(body);
+      window.location.href = `mailto:${TEAM_EMAIL}?subject=${s}&body=${b}`;
+    }
+
+    document.getElementById('donateForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('donorName').value.trim();
+      const email = document.getElementById('donorEmail').value.trim();
+      const school = document.getElementById('school').value;
+      const items = document.getElementById('items').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+      const subject = `Donation Drop-off — ${school}`;
+      const body =
+        `Hi Pack the Pantry team,
+
+` +
+        `I’d like to donate items for ${school}.
+
+` +
+        `Name: ${name || '(not provided)'}
+` +
+        `Email: ${email || '(not provided)'}
+
+` +
+        `Items: ${items}
+
+` +
+        (notes ? `Notes: ${notes}
+
+` : '') +
+        `Can you share the best drop-off instructions and hours?
+
+Thank you!`;
+      openMail(subject, body);
+    });
+
+    document.getElementById('volunteerForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('volName').value.trim();
+      const email = document.getElementById('volEmail').value.trim();
+      const role = document.getElementById('role').value;
+      const availability = document.getElementById('availability').value;
+      const notes = document.getElementById('volNotes').value.trim();
+      const subject = `Volunteer Sign-up — ${role}`;
+      const body =
+        `Hi Pack the Pantry team,
+
+` +
+        `I’d like to volunteer.
+
+` +
+        `Name: ${name}
+` +
+        `Email: ${email}
+` +
+        `Role: ${role}
+` +
+        `Availability: ${availability}
+
+` +
+        (notes ? `Notes: ${notes}
+
+` : '') +
+        `Please let me know next steps and shift details.
+
+Thank you!`;
+      openMail(subject, body);
+    });
+
+    document.getElementById('sponsorForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const biz = document.getElementById('biz').value.trim();
+      const contactName = document.getElementById('contactName').value.trim();
+      const contactEmail = document.getElementById('contactEmail').value.trim();
+      const interest = document.getElementById('interest').value;
+      const notes = document.getElementById('sponsorNotes').value.trim();
+      const subject = `Sponsorship Interest — ${biz}`;
+      const body =
+        `Hi Pack the Pantry team,
+
+` +
+        `We’re interested in sponsoring Pack the Pantry 2.0.
+
+` +
+        `Business/Org: ${biz}
+` +
+        `Contact: ${contactName}
+` +
+        `Email: ${contactEmail}
+` +
+        `Interest: ${interest}
+
+` +
+        (notes ? `Notes: ${notes}
+
+` : '') +
+        `Could you send a sponsor packet and the next steps?
+
+Thank you!`;
+      openMail(subject, body);
+    });
+
     document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const msg  = document.getElementById('message').value.trim();
-      const subject = encodeURIComponent('Portfolio message from ' + (name || 'someone'));
-      const body = encodeURIComponent((name ? ('Name: ' + name + '\n\n') : '') + msg);
-      window.location.href = `mailto:pragyav2007123@gmail.com?subject=${subject}&body=${body}`;
+      const name = document.getElementById('cName').value.trim();
+      const msg  = document.getElementById('cMsg').value.trim();
+      const subject = `Question from ${name || 'a supporter'}`;
+      const body = `Name: ${name || '(not provided)'}
+
+Message:
+${msg}`;
+      openMail(subject, body);
     });
+
+    // Placeholder buttons
+    document.getElementById('donationLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Replace this with your real donation link (PayPal/Venmo/GoFundMe).');
+    });
+    document.getElementById('wishlistLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Replace this with your Amazon wishlist link.');
+    });
+
+    function applyRoundVisibility(){
+      const show = Boolean(ROUND_LIVE);
+      const hNav = document.getElementById('helpersNav');
+      const lNav = document.getElementById('leaderboardNav');
+      const hSec = document.getElementById('helpers');
+      const lSec = document.getElementById('leaderboard');
+      if(hNav) hNav.style.display = show ? '' : 'none';
+      if(lNav) lNav.style.display = show ? '' : 'none';
+      if(hSec) hSec.style.display = show ? '' : 'none';
+      if(lSec) lSec.style.display = show ? '' : 'none';
+    }
+
+    // Initial render
+    render();
+    applyRoundVisibility();
   </script>
 </body>
 </html>
-
