@@ -36,40 +36,26 @@
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
+    html,body{
       margin:0;
       font-family: var(--sans);
-      color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 10% 0%, rgba(46,107,255,.30), transparent 60%),
-        radial-gradient(900px 600px at 92% 18%, rgba(69,178,255,.22), transparent 60%),
-        radial-gradient(1000px 700px at 40% 105%, rgba(46,107,255,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color: #1f2937;
+      background: #ffffff; /* solid white background */
       overflow-x:hidden;
     }
 
     a{ color: inherit; text-decoration:none; }
     a:hover{ opacity:.92; }
 
-    .grid{
-      pointer-events:none;
-      position:fixed; inset:0;
-      opacity:.18;
-      background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(900px 520px at 50% 10%, rgba(0,0,0,1), transparent 65%);
-    }
+    /* remove iridescent grid background */
+    .grid{ display:none; }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding: 0 22px; }
 
     header{
       position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(5,10,24,.72), rgba(5,10,24,.38));
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      background:#ffffff;
+      border-bottom: 2px solid var(--brand);
     }
 
     .nav{ display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap: 14px; }
@@ -104,34 +90,35 @@
       gap: 10px;
       padding: 12px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      box-shadow: var(--shadow2);
-      transition: transform .16s ease, background .16s ease, border-color .16s ease;
+      border: 2px solid var(--brand);
+      background: #ffffff;
+      color: var(--brand2);
+      transition: .15s ease;
       font-weight: 700;
       font-size: 14px;
       cursor:pointer;
-      user-select:none;
     }
+    .btn:hover{ background: var(--accent); color:#000000; }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
     .btn.primary{
-      border-color: rgba(46,107,255,.52);
-      background: linear-gradient(135deg, rgba(46,107,255,.95), rgba(69,178,255,.85));
-      box-shadow: 0 14px 35px rgba(46,107,255,.22);
+      border-color: var(--brand2);
+      background: var(--brand2);
+      color:#ffffff;
+      box-shadow:none;
     }
     .btn.good{
-      border-color: rgba(56,217,159,.40);
-      background: linear-gradient(135deg, rgba(56,217,159,.55), rgba(69,178,255,.55));
+      border-color: var(--brand);
+      background: var(--brand);
+      color:#ffffff;
     }
 
     main{ padding: 30px 0 70px; }
 
     .card{
       border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      border: 2px solid var(--brand2);
+      background: #ffffff;
+      box-shadow: none;
       overflow:hidden;
       position:relative;
     }
@@ -153,16 +140,15 @@
       align-items:center;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(46,107,255,.10);
-      border: 1px solid rgba(46,107,255,.28);
-      color: rgba(234,240,255,.88);
+      background: var(--brand);
+      color:#ffffff;
       font-size: 13px;
       font-weight: 700;
     }
 
     .dot{ width: 8px; height: 8px; border-radius: 99px; background: linear-gradient(135deg, var(--brand), var(--brand2)); box-shadow: 0 0 0 4px rgba(46,107,255,.16); }
 
-    h1{ margin: 14px 0 10px; font-size: clamp(34px, 3.6vw, 48px); line-height:1.05; letter-spacing:-.6px; }
+    h1{ margin: 14px 0 10px; font-size: clamp(34px, 3.6vw, 46px); line-height:1.1; color: var(--brand2); }
     .sub{ color: var(--muted); font-size: 16px; line-height:1.55; max-width: 68ch; }
 
     .heroActions{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 16px; }
@@ -175,10 +161,10 @@
     }
 
     .pill{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 12px 12px;
+      border-radius: 14px;
+      border: 2px solid var(--accent2);
+      background: #ffffff;
+      padding: 12px;
     }
     .pill .t{ font-size:12px; color: var(--muted2); text-transform:uppercase; letter-spacing:.12em; }
     .pill .v{ margin-top:6px; font-weight:800; }
@@ -187,11 +173,10 @@
 
     .tile{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
+      border: 2px solid var(--brand);
+      background: #ffffff;
       padding: 16px;
       position:relative;
-      overflow:hidden;
     }
     .tile::before{ content:""; position:absolute; inset:-2px; background: radial-gradient(520px 200px at 20% 0%, rgba(46,107,255,.16), transparent 60%); pointer-events:none; }
 
@@ -253,13 +238,41 @@
     .progressBar{ height: 10px; border-radius: 999px; background: rgba(255,255,255,.10); overflow:hidden; margin-top: 10px; }
     .progressFill{ height:100%; width: 0%; border-radius: 999px; background: linear-gradient(135deg, rgba(46,107,255,1), rgba(69,178,255,1)); }
 
-    footer{ border-top: 1px solid rgba(255,255,255,.10); background: rgba(5,10,24,.55); padding: 22px 0; }
+    footer{ border-top: 2px solid var(--brand); background:#ffffff; padding: 22px 0; }
     .foot{ display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap; align-items:center; color: var(--muted); font-size: 13px; }
 
     .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
     @media (max-width: 920px){
+      .wrap{ padding: 0 16px; }
+      .nav{ padding: 12px 0; }
+      .navlinks{ display:none; }
+
+      /* Mobile nav */
+      .mobileBar{ display:flex !important; }
+      .mobileMenuBtn{ display:inline-flex !important; }
+
       .hero{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .stats{ grid-template-columns: 1fr; }
+      .formRow{ grid-template-columns: 1fr; }
+
+      h1{ font-size: 34px; }
+      .heroLeft{ padding: 18px; }
+      .heroRight{ padding: 14px; }
+
+      .btn{ width:100%; justify-content:center; padding: 14px 16px; }
+      .heroActions{ width:100%; }
+      .heroActions > *{ flex: 1 1 100%; }
+
+      /* Give breathing room for bottom bar */
+      main{ padding-bottom: 120px; }
+    }
+
+    @media (max-width: 380px){
+      h1{ font-size: 30px; }
+    }
       .grid3{ grid-template-columns: 1fr; }
       .grid2{ grid-template-columns: 1fr; }
       .stats{ grid-template-columns: 1fr; }
@@ -282,7 +295,7 @@
           <span>Pack the Pantry <span style="color:rgba(234,240,255,.70); font-weight:750;">2.0</span></span>
         </a>
 
-        <div class="navlinks">
+        <div class="navlinks" id="navLinks">
           <a href="#how">How it works</a>
           <a href="#donate">Donate</a>
           <a href="#volunteer">Volunteer</a>
@@ -293,7 +306,26 @@
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </div>
+
+        <button class="btn mobileMenuBtn" id="menuBtn" type="button" style="display:none; padding:10px 12px; width:auto;">
+          Menu
+        </button>
       </nav>
+
+      <!-- Mobile dropdown menu -->
+      <div id="mobileMenu" style="display:none; padding: 0 0 14px;">
+        <div style="border:2px solid var(--brand); border-radius:16px; padding:12px; display:grid; gap:8px; background:#ffffff;">
+          <a class="btn" href="#how" style="width:100%;">How it works</a>
+          <a class="btn" href="#donate" style="width:100%;">Donate</a>
+          <a class="btn" href="#volunteer" style="width:100%;">Volunteer</a>
+          <a class="btn" href="#schools" style="width:100%;">Schools</a>
+          <a class="btn" href="#helpers" id="helpersNavMobile" style="display:none; width:100%;">Helpers</a>
+          <a class="btn" href="#leaderboard" id="leaderboardNavMobile" style="display:none; width:100%;">Leaderboard</a>
+          <a class="btn" href="#sponsors" style="width:100%;">Sponsors</a>
+          <a class="btn" href="#faq" style="width:100%;">FAQ</a>
+          <a class="btn" href="#contact" style="width:100%;">Contact</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -863,10 +895,42 @@
     </div>
   </footer>
 
+  <!-- Mobile bottom action bar -->
+  <div class="mobileBar" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:60; background:#ffffff; border-top:2px solid var(--brand); padding:10px 12px;">
+    <div class="wrap" style="padding:0 16px;">
+      <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
+        <a class="btn primary" href="#donate" style="width:100%;">Donate</a>
+        <a class="btn good" href="#volunteer" style="width:100%;">Volunteer</a>
+        <a class="btn" href="#schools" style="width:100%;">Schools</a>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ROUND TOGGLE
     // Set to true when Round 2 begins (end of this month). When true, Helpers + Leaderboard tabs/sections appear.
     const ROUND_LIVE = false;
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if(menuBtn){
+      menuBtn.addEventListener('click', () => {
+        const open = mobileMenu.style.display !== 'none';
+        mobileMenu.style.display = open ? 'none' : 'block';
+        menuBtn.textContent = open ? 'Menu' : 'Close';
+      });
+    }
+
+    // Close mobile menu on click
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if(!mobileMenu || !menuBtn) return;
+      if(t && t.tagName === 'A' && mobileMenu.contains(t)){
+        mobileMenu.style.display = 'none';
+        menuBtn.textContent = 'Menu';
+      }
+    });
 
     // Smooth scroll (respects reduced motion)
     (function(){
@@ -1108,10 +1172,14 @@ ${msg}`;
       const show = Boolean(ROUND_LIVE);
       const hNav = document.getElementById('helpersNav');
       const lNav = document.getElementById('leaderboardNav');
+      const hNavM = document.getElementById('helpersNavMobile');
+      const lNavM = document.getElementById('leaderboardNavMobile');
       const hSec = document.getElementById('helpers');
       const lSec = document.getElementById('leaderboard');
       if(hNav) hNav.style.display = show ? '' : 'none';
       if(lNav) lNav.style.display = show ? '' : 'none';
+      if(hNavM) hNavM.style.display = show ? '' : 'none';
+      if(lNavM) lNavM.style.display = show ? '' : 'none';
       if(hSec) hSec.style.display = show ? '' : 'none';
       if(lSec) lSec.style.display = show ? '' : 'none';
     }
