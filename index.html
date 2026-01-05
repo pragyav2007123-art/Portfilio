@@ -273,14 +273,60 @@
     @media (max-width: 380px){
       h1{ font-size: 30px; }
     }
-      .grid3{ grid-template-columns: 1fr; }
-      .grid2{ grid-template-columns: 1fr; }
-      .stats{ grid-template-columns: 1fr; }
-      .formRow{ grid-template-columns: 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce){
+
+    @media (prefers-reduced-motion: reduce){{
       *{ scroll-behavior:auto !important; transition:none !important; animation:none !important; }
     }
+  
+
+    /* ================================
+       READABILITY: FORCE BLACK TEXT
+       (keeps button text styling)
+       ================================ */
+
+    /* Make all normal text black + fully opaque */
+    body, p, li, ul, ol, span, div, small, label,
+    h1, h2, h3, h4, h5, h6,
+    a, .sub, .meta, .hint, .pill .t, .sectionHead p, .foot, .badge,
+    table, th, td {
+      color: #000000 !important;
+      opacity: 1 !important;
+    }
+
+    /* Keep buttons styled (override the global black rule) */
+    .btn, .btn *{ opacity: 1 !important; }
+    .btn{ color: var(--brand2) !important; }
+    .btn.primary{ color:#ffffff !important; }
+    .btn.good{ color:#ffffff !important; }
+
+    /* Inputs should be readable on white */
+    input, select, textarea{
+      color:#000000 !important;
+      background:#ffffff !important;
+      border: 2px solid var(--brand) !important;
+    }
+
+    /* Nav links on white background */
+    .navlinks a{
+      color:#000000 !important;
+      background: transparent !important;
+      border-color: transparent !important;
+    }
+    .navlinks a:hover{
+      background: rgba(89,193,169,.18) !important; /* teal tint */
+      border-color: rgba(55,54,105,.35) !important; /* indigo tint */
+      opacity: 1 !important;
+    }
+
+    /* Remove dark-theme leftover glass styles */
+    .badge{
+      border-color: rgba(55,54,105,.25) !important;
+      background: rgba(89,193,169,.14) !important;
+    }
+    .divider{ background: rgba(55,54,105,.18) !important; }
+    .progressWrap{ border-color: rgba(55,54,105,.25) !important; background: #ffffff !important; }
+    .progressBar{ background: rgba(55,54,105,.15) !important; }
+
   </style>
 </head>
 
@@ -375,7 +421,7 @@
         </div>
 
         <aside class="card heroRight" aria-label="Admin quick edit">
-<div class="tile" id="adminPanel">
+          <div class="tile">
             <div class="meta">Admin quick edit</div>
             <h3 style="margin:6px 0 0;">Update drive numbers</h3>
             <p style="margin-top:8px;">This is a lightweight, no-backend version: values save in your browser (localStorage). Perfect until you connect a real database.</p>
@@ -965,32 +1011,21 @@
       return x.toLocaleString();
     };
 
-function getState(){
-  // Prefer Google Sheets if available
-  if(USE_GOOGLE_SHEETS && sheetDrive){
-    return {
-      goal: Number(sheetDrive.goal ?? 0),
-      collected: Number(sheetDrive.collected ?? 0),
-      endDate: String(sheetDrive.endDate ?? ''),
-      driveName: String(sheetDrive.driveName ?? '')
-    };
-  }
-
-  // Otherwise fall back to localStorage
-  try{
-    const raw = localStorage.getItem(KEY);
-    if(!raw) return { goal: 1000, collected: 0, endDate: '', driveName: '' };
-    const parsed = JSON.parse(raw);
-    return {
-      goal: Number(parsed.goal ?? 1000),
-      collected: Number(parsed.collected ?? 0),
-      endDate: String(parsed.endDate ?? ''),
-      driveName: String(parsed.driveName ?? '')
-    };
-  }catch(_){
-    return { goal: 1000, collected: 0, endDate: '', driveName: '' };
-  }
-}
+    function getState(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return { goal: 1000, collected: 0, endDate: '', driveName: '' };
+        const parsed = JSON.parse(raw);
+        return {
+          goal: Number(parsed.goal ?? 1000),
+          collected: Number(parsed.collected ?? 0),
+          endDate: String(parsed.endDate ?? ''),
+          driveName: String(parsed.driveName ?? '')
+        };
+      }catch(_){
+        return { goal: 1000, collected: 0, endDate: '', driveName: '' };
+      }
+    }
 
     function setState(s){
       localStorage.setItem(KEY, JSON.stringify({
@@ -1052,106 +1087,6 @@ function getState(){
 
     // --- Forms: open pre-filled email drafts (no backend needed) ---
     const TEAM_EMAIL = 'packthepantry2.0@gmail.com'; // replace if needed
-    // --- Google Sheets (Published) sync ---
-// Your published sheet:
-const USE_GOOGLE_SHEETS = true;
-const PUBLISHED_SHEET_ID = '2PACX-1vSuRrFXkAINinpl7rdzcCIFp3dRFn_0RpoSbUJyIb-uRq8jCAkKjYpVj6g9XxeFBp5ZFUuzbRzd2oSi';
-
-const SHEET_URL = (sheetName) =>
-  "https://docs.google.com/spreadsheets/d/e/" +
-  PUBLISHED_SHEET_ID +
-  "/gviz/tq?tqx=out:json&sheet=" +
-  encodeURIComponent(sheetName);
-
-let sheetDrive = null;       // {goal, collected, endDate, driveName}
-let sheetLeaderboard = null; // [{school, items, points}]
-
-function coerceNumber(v){
-  if(v === null || v === undefined) return 0;
-  const n = Number(String(v).replace(/[^0-9.-]/g,''));
-  return Number.isFinite(n) ? n : 0;
-}
-
-function parseGviz(text){
-  // text contains: google.visualization.Query.setResponse({...});
-  const start = text.indexOf("setResponse(");
-  if(start === -1) throw new Error("No setResponse() found");
-  const openParen = text.indexOf("(", start);
-  const closeParen = text.lastIndexOf(")");
-  if(openParen === -1 || closeParen === -1) throw new Error("Bad GViz format");
-  const jsonStr = text.slice(openParen + 1, closeParen);
-  return JSON.parse(jsonStr);
-}
-
-async function fetchSheet(sheetName){
-  const res = await fetch(SHEET_URL(sheetName), { cache: "no-store" });
-  if(!res.ok) throw new Error("Sheet fetch failed: " + res.status);
-  const text = await res.text();
-  const json = parseGviz(text);
-  const table = json.table;
-  const cols = (table.cols || []).map(c => (c.label || '').trim());
-  const rows = (table.rows || []).map(r => (r.c || []).map(cell => cell ? (cell.v ?? '') : ''));
-  return { cols, rows };
-}
-
-async function syncFromGoogleSheets(){
-  try{
-    // Expect a tab named "drive" with columns: key | value
-    const drive = await fetchSheet("drive");
-    const keyIdx = drive.cols.findIndex(c => c.toLowerCase() === "key");
-    const valIdx = drive.cols.findIndex(c => c.toLowerCase() === "value");
-    if(keyIdx === -1 || valIdx === -1) throw new Error('Drive sheet must have columns: key, value');
-
-    const map = {};
-    drive.rows.forEach(r => {
-      const k = String(r[keyIdx] ?? "").trim();
-      const v = r[valIdx];
-      if(k) map[k] = v;
-    });
-
-    sheetDrive = {
-      driveName: String(map.driveName ?? map.drivename ?? "").trim(),
-      goal: coerceNumber(map.goal),
-      collected: coerceNumber(map.collected),
-      endDate: String(map.endDate ?? map.enddate ?? "").trim()
-    };
-
-    // Optional tab: "leaderboard" with columns: school | items | points
-    try{
-      const lb = await fetchSheet("leaderboard");
-      const sI = lb.cols.findIndex(c => c.toLowerCase() === "school");
-      const iI = lb.cols.findIndex(c => c.toLowerCase() === "items");
-      const pI = lb.cols.findIndex(c => c.toLowerCase() === "points");
-      if(sI === -1 || iI === -1) throw new Error("Leaderboard must have school, items (points optional)");
-
-      sheetLeaderboard = lb.rows
-        .map(r => ({
-          school: String(r[sI] ?? "").trim(),
-          items: coerceNumber(r[iI]),
-          points: pI === -1 ? 0 : coerceNumber(r[pI])
-        }))
-        .filter(x => x.school);
-    } catch(_){
-      sheetLeaderboard = null;
-    }
-
-    // Hide admin panel if sheets are working
-    const admin = document.getElementById("adminPanel");
-    if(admin) admin.style.display = "none";
-
-    render();
-  } catch(err){
-    // Fallback to localStorage
-    sheetDrive = null;
-    sheetLeaderboard = null;
-
-    const admin = document.getElementById("adminPanel");
-    if(admin) admin.style.display = "";
-
-    console.warn("Google Sheets sync failed; falling back to local edits.", err);
-    render();
-  }
-}
 
     function openMail(subject, body){
       const s = encodeURIComponent(subject);
@@ -1296,16 +1231,8 @@ ${msg}`;
     }
 
     // Initial render
-render();
-applyRoundVisibility();
-
-// Sync from Google Sheets (refresh every 60 seconds)
-if(USE_GOOGLE_SHEETS){
-  syncFromGoogleSheets();
-  setInterval(syncFromGoogleSheets, 60000);
-}
-
+    render();
+    applyRoundVisibility();
   </script>
 </body>
 </html>
-
